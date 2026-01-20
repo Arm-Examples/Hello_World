@@ -1,0 +1,85 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "JLink (launch)",
+            "type": "gdbtarget",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/",
+            "program": "out/Hello/XMC1100-Q024x0064/Debug/Hello.axf",
+            "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
+            "preLaunchTask": "CMSIS Load",
+            "initCommands": [
+                "monitor semihosting ioclient 1",
+                "monitor semihosting enable",
+                "monitor reset 0",
+                "tbreak main",
+                ""
+            ],
+            "customResetCommands": [
+                "monitor reset 0",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
+                "tbreak main",
+                "continue"
+            ],
+            "target": {
+                "server": "JLinkGDBServerCL",
+                "serverParameters": [
+                    "-device",
+                    "XMC1100-Q024x0064",
+                    "-endian",
+                    "little",
+                    "-if",
+                    "swd",
+                    "-speed",
+                    "4000",
+                    "-halt",
+                    "-noir",
+                    "-vd",
+                    "-nogui",
+                    "-localhostonly",
+                    "-silent",
+                    "-port",
+                    "3333",
+                    "-TelnetPort",
+                    "4444"
+                ],
+                "port": "3333"
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        },
+        {
+            "name": "JLink (attach)",
+            "type": "gdbtarget",
+            "request": "attach",
+            "cwd": "${workspaceFolder}/",
+            "program": "out/Hello/XMC1100-Q024x0064/Debug/Hello.axf",
+            "gdb": "arm-none-eabi-gdb",
+            "auxiliaryGdb": true,
+            "initCommands": [
+                "monitor semihosting ioclient 1",
+                "monitor semihosting enable",
+                ""
+            ],
+            "customResetCommands": [
+                "monitor reset 0",
+                "maintenance flush register-cache",
+                "maintenance flush dcache",
+                "tbreak main",
+                "continue"
+            ],
+            "target": {
+                "port": "3333"
+            },
+            "cmsis": {
+                "cbuildRunFile": "${command:cmsis-csolution.getCbuildRunFile}",
+                "updateConfiguration": "auto"
+            }
+        }
+    ]
+}
