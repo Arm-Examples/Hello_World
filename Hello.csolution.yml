@@ -27,7 +27,7 @@ solution:
       target-set:
         - set:
           images:
-            - project-context: Blank.Debug
+            - project-context: Hello.Debug
           debugger:
             name: J-Link Server
             clock: 4000000
@@ -47,5 +47,5 @@ solution:
 
   # List related projects.
   projects:
-    - project: ./Blank.cproject.yml
+    - project: ./Hello.cproject.yml
   compiler: AC6

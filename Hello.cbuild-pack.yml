@@ -3,9 +3,6 @@ cbuild-pack:
     - resolved-pack: ARM::CMSIS@6.2.0
       selected-by-pack:
         - ARM::CMSIS
-    - resolved-pack: ARM::CMSIS-FreeRTOS@11.1.0
-      selected-by-pack:
-        - ARM::CMSIS-FreeRTOS
     - resolved-pack: Infineon::XMC1000_DFP@2.12.0
       selected-by-pack:
         - Infineon::XMC1000_DFP

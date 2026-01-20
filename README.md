@@ -4,8 +4,11 @@ Simple "Hello World" example for
 **[Infineon XMC2Go](https://www.keil.arm.com/boards/infineon-xmc-2go-v1-d3962c0/projects/)** development board.
 This example is configured to print `Hello World` once a second via semihosting to the Telnet console.
 
-Other [serial I/O message options](https://github.com/Arm-Examples/.github/blob/main/profile/Serial.md) can be
-configured as well (refer to [Going Further](#going-further)).
+This application is generic and can be easily adapted to [other target hardware](#change-the-target-hardware). You can
+also [swtich the underlying real-time operating system](#exchange-the-rtos).
+
+Other [message output options](https://github.com/Arm-Examples/.github/blob/main/profile/Serial.md) can be
+configured as well (refer to [Serial I/O via UART](#serial-io-via-uart)).
 
 ## Quick Start
 
@@ -28,26 +31,99 @@ configured as well (refer to [Going Further](#going-further)).
    ...
    ```
 
-## Going Further
+## Change the Target Hardware
+
+This application is a generic CMSIS example that will run on any target hardware. If you want to change to another
+development board/device, edit the following.
+
+In the `Hello.csolution.yml` file, add the device's/board's CMSIS-Packs:
+
+```yml
+  packs:
+    - pack: ARM::CMSIS
+    - pack: Infineon::XMC1000_DFP # Change to the right CMSIS-Pack
+```
+
+Then, change the `target-type:/- type` to a new name and enter the correct `device:`/`board:` names:
+
+```yml
+  # List different hardware targets that are used to deploy the solution.
+  target-types:
+    - type: XMC1100-Q024x0064  # Change to a meaningful name
+      target-set:
+        - set:
+          images:
+            - project-context: Hello.Debug
+          debugger:
+            name: J-Link Server
+            clock: 4000000
+            protocol: swd
+      device: XMC1100-Q024x0064  # Change to actual device
+      board: XMC 2Go:V1          # Change to actual board
+```
+
+## Exchange the RTOS
+
+This example is using the [CMSIS-RTOS v2 API](https://arm-software.github.io/CMSIS_6/latest/RTOS2/index.html) with
+[CMSIS-FreeRTOS](https://arm-software.github.io/CMSIS-FreeRTOS/main/index.html) as the underlying real-time operating
+system kernel. If you wish to change the kernel to
+[Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html), do the following.
+
+In the `Hello.cproject.yml` file, exchange:
+
+```yml
+    - component: CMSIS:RTOS2:FreeRTOS&Cortex-M
+    - component: RTOS&FreeRTOS:Config&CMSIS RTOS2
+    - component: RTOS&FreeRTOS:Core&Cortex-M
+    - component: RTOS&FreeRTOS:Event Groups
+    - component: RTOS&FreeRTOS:Timers
+    - component: RTOS&FreeRTOS:Heap&Heap_4
+```
+
+with:
+
+```yml
+    - component: CMSIS:RTOS2:Keil RTX5&Source
+```
+
+In the same file, exchange the **ARM::CMSIS-FreeRTOS** pack with the **ARM::CMSIS-RTX** pack:
+
+```yml
+    - pack: ARM::CMSIS-RTX
+```
+
+## Serial I/O via UART
 
 While semihosting requires not hardware configuration and can be easily used for quick debugging, it is not recommended
 for production systems (due to intrusive and slow communication). A viable option is to use a UART (serial port)
 instead. The following explains how to use the on-chip UART which is available through the Segger J-Link debug adapter
 for `printf` output.
 
+> [!ATTENTION]
+> The following is specific for the XMC2Go development board. If you have
+> [changed the target hardware](#change-the-target-hardware), consult your board specific documentation to select the
+> right software components and CMSIS-Packs.
+
 ### Adding Software Components
 
-To be able to redirect the output to the UART, you need the following software components. The
-[Keil Studio User's Guide](https://mdk-packs.github.io/vscode-cmsis-solution-docs/create_app.html#software-components)
-explains how to add them.
+To be able to redirect the output to the UART, you need to add the following software components in the
+`Hello.cproject.yml` file:
 
-- CMSIS-Compiler:CORE
-- CMSIS-Compiler:STDOUT:Custom
-- CMSIS Driver:USART
-- Device:RTE_Device
+```yml
+    - component: CMSIS-Compiler:CORE
+    - component: CMSIS-Compiler:STDOUT:Custom
+    - component: CMSIS Driver:USART
+    - component: Device:RTE_Device
+    - component: Device:XMClib:GPIO
+    - component: Device:XMClib:SCU
+    - component: Device:XMClib:UART
+```
 
-> [!NOTE]
-> Check the validation output for further components that may be required.
+Also, add the **ARM::CMSIS-Compiler** pack to the list of `packs:` in the same file:
+
+```yml
+    - pack: ARM::CMSIS-Compiler
+```
 
 ### Adding User Code
 
