@@ -32,8 +32,6 @@ solution:
             name: J-Link Server
             clock: 4000000
             protocol: swd
-            telnet:
-              - mode: monitor
       device: XMC1100-Q024x0064
       board: XMC 2Go:V1
 
