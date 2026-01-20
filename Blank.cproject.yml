@@ -14,6 +14,13 @@ project:
   components:
     - component: CMSIS:CORE
     - component: Device:Startup
+    - component: CMSIS:OS Tick:SysTick
+    - component: CMSIS:RTOS2:FreeRTOS&Cortex-M
+    - component: RTOS&FreeRTOS:Config&CMSIS RTOS2
+    - component: RTOS&FreeRTOS:Core&Cortex-M
+    - component: RTOS&FreeRTOS:Event Groups
+    - component: RTOS&FreeRTOS:Timers
+    - component: RTOS&FreeRTOS:Heap&Heap_4
 
   # List executable file formats to be generated.
   output:
@@ -21,3 +28,5 @@ project:
       - elf
       - hex
       - map
+  packs:
+    - pack: ARM::CMSIS-FreeRTOS

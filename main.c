@@ -15,39 +15,73 @@
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ *      Name:    main.c
+ *      Purpose: Print a few lines so you can quickly verify that:
+ *               - startup code runs correctly,
+ *               - clocks/stack/heap are sane,
+ *               - and stdout routing is configured as expected.
+ *
  *---------------------------------------------------------------------------*/
 
 #include "RTE_Components.h"
 #include CMSIS_device_header
-
+#include "cmsis_os2.h"
 #include <stdio.h>
 
+static   osThreadId_t tid_thrPRINTF;       // Thread id of thread: thrPRINTF
+
+// Create thread attribute to show thread name in the XRTOS viewer:
+const osThreadAttr_t app_main_attr  = {.name = "MainThread"};
+const osThreadAttr_t thrPRINTF_attr = {.name = "PrintfThread"};
+
+/*---------------------------------------------------------------------------
+  thrPRINTF: Print message thread
+ *---------------------------------------------------------------------------*/
+__NO_RETURN static void thrPRINTF (void *arg) {
+
+  (void)arg;
+
+  for (;;) {
+    printf("Hello, World!\r\n");  // Print message
+    osDelay(1000);         // Delay 1 second
+  }
+}
+
+/*---------------------------------------------------------------------------
+ * Application main thread
+ *---------------------------------------------------------------------------*/
+static void app_main_thread (void *argument) {
+  (void)argument;
+
+  tid_thrPRINTF = osThreadNew(thrPRINTF, NULL, &thrPRINTF_attr);         // Create PRINTF thread
+  if (tid_thrPRINTF == NULL) { /* add error handling */ }
+
+  for (;;) {                            // Loop forever
+  }
+}
+
 /*-----------------------------------------------------------------------------
- * Minimal “Hello World” example.
- *
- * Notes for embedded targets:
- * - This uses `printf`, so your toolchain/project must provide a backend for
- *   stdout (e.g., UART retargeting, SWO/ITM, semihosting, or a debug-probe
- *   console). If stdout is not routed anywhere, the code will still run but you
- *   won't see output.
- * - For production firmware, `printf` can be expensive (flash/RAM/time). It is
- *   kept here for clarity and bring-up verification.
+ * Application initialization
+ *----------------------------------------------------------------------------*/
+int main (void) {
+  osKernelInitialize();                         // Initialize CMSIS-RTOS2
+  osThreadNew(app_main_thread, NULL, &app_main_attr);  // Create application main thread
+  osKernelStart();                              // Start thread execution
+  return 0;
+}
+
+/*-----------------------------------------------------------------------------
+ * For your reference: this is the super-loop example 'main' function.
  *---------------------------------------------------------------------------*/
 
-int main() {
-    /*-------------------------------------------------------------------------
-     * Print a few lines so you can quickly verify that:
-     * - startup code runs correctly,
-     * - clocks/stack/heap are sane,
-     * - and stdout routing is configured as expected.
-     *-----------------------------------------------------------------------*/
-    for (int count = 0; count < 10; count++) {
-        /* CRLF for terminals that expect \r\n line endings. */
-        printf("Hello, World! %d\r\n", count);
-    }
-
-    /*-------------------------------------------------------------------------
-     * Many bare-metal projects keep running forever (e.g., while (1) { ... }).
-     * This example simply returns from `main` after printing.
-     *-----------------------------------------------------------------------*/
-}
+/*---------------------------------------------------------------------------
+ * int main() {
+ *     for (int count = 0; count < 10; count++) {
+ *         printf("Hello, World! %d\r\n", count);
+ *     }
+ *     while (1) {
+ *     nop();
+ *     }
+ * }
+ *---------------------------------------------------------------------------*/

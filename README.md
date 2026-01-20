@@ -1,7 +1,7 @@
 # Hello, World!
 
 Simple "Hello World" example for
-[**Infineon XMC2Go**](hhttps://www.keil.arm.com/boards/infineon-xmc-2go-v1-d3962c0/projects/) development board.
+**[Infineon XMC2Go](https://www.keil.arm.com/boards/infineon-xmc-2go-v1-d3962c0/projects/)** development board.
 This example is configured to print `Hello World` and a counter value via semihosting to the Telnet console.
 
 Other [serial I/O message options](https://github.com/Arm-Examples/.github/blob/main/profile/Serial.md) can be

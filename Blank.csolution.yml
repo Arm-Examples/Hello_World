@@ -16,7 +16,6 @@ solution:
         - -gdwarf-5
       ASM:
         - -gdwarf-5
-
       # List the packs that define the device and/or board.
   packs:
     - pack: ARM::CMSIS
