@@ -316,7 +316,7 @@
 //  <i> Default: 0
 #define configUSE_PASSIVE_IDLE_HOOK               0
 // </h>
-
+#define configRECORD_STACK_HIGH_ADDRESS   1
 //------------- <<< end of configuration section >>> ---------------------------
 
 /* Defines needed by FreeRTOS to implement CMSIS RTOS2 API. Do not change! */
