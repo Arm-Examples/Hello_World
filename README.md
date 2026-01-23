@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/github/license/Arm-Examples/Hello_World?label)](https://github.com/Arm-Examples/Hello_World/blob/main/LICENSE)
+
 # Hello, World! (CMSIS Solution Example)
 
 This is a minimal **Hello, World!** application for Arm Cortex-M devices using the **CMSIS Solution** project format.
@@ -44,7 +46,7 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
 This application is a generic CMSIS example that will run on any target hardware. If you want to change to another
 development board/device, edit the following.
 
-In the `Hello.csolution.yml` file, add the device's/board's CMSIS-Packs:
+In the [`Hello.csolution.yml`](Hello.csolution.yml) file, add the device's/board's CMSIS-Packs:
 
 ```yml
   packs:
@@ -74,15 +76,12 @@ Then, change the `target-type:/- type` to a new name and enter the correct `devi
 
 This example is using the [CMSIS-RTOS v2 API](https://arm-software.github.io/CMSIS_6/latest/RTOS2/index.html) with
 [CMSIS-FreeRTOS](https://arm-software.github.io/CMSIS-FreeRTOS/main/index.html) as the underlying real-time operating
-system kernel. If you wish to change the kernel to
-[Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html), do the following.
+system kernel.
 
-In the [`Hello.cproject.yml`](Hello.cproject.yml) file, exchange:
+
+To change the kernel to [Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html) exchange in the file [`Hello.cproject.yml`](Hello.cproject.yml):
 
 ```yml
-  packs:
-    - pack: ARM::CMSIS-FreeRTOS
-
   components:
     - component: CMSIS:RTOS2:FreeRTOS&Cortex-M
     - component: RTOS&FreeRTOS:Config&CMSIS RTOS2
@@ -90,16 +89,19 @@ In the [`Hello.cproject.yml`](Hello.cproject.yml) file, exchange:
     - component: RTOS&FreeRTOS:Event Groups
     - component: RTOS&FreeRTOS:Timers
     - component: RTOS&FreeRTOS:Heap&Heap_4
+
+  packs:
+    - pack: ARM::CMSIS-FreeRTOS
 ```
 
 with:
 
 ```yml
-  packs:
-    - pack: ARM::CMSIS-FreeRTOS
-
   components:
     - component: CMSIS:RTOS2:Keil RTX5&Source
+
+  packs:
+    - pack: ARM::CMSIS-FreeRTOS
 ```
 
 ## Serial I/O via UART
