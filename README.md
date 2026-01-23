@@ -22,7 +22,7 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
 
 1. Install [Keil Studio for VS Code](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) from the
    VS Code marketplace.
-2. [Clone this Git repository](https://vscode.dev/github.com/Arm-Examples/Hello_World) into a VS Code workspace.
+2. Clone this Git repository into a VS Code workspace.
 3. The related tools and software packs are downloaded and installed. Review progress with
    *View - Output - CMSIS Solution*.
 4. In the CMSIS view, use the
@@ -38,8 +38,6 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
    Hello, World!
    ...
    ```
-
-[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)](https://vscode.dev/github.com/Arm-Examples/Hello_World)
 
 ## Change Target Hardware
 
@@ -79,9 +77,13 @@ This example is using the [CMSIS-RTOS v2 API](https://arm-software.github.io/CMS
 system kernel. If you wish to change the kernel to
 [Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html), do the following.
 
-In the `Hello.cproject.yml` file, exchange:
+In the [`Hello.cproject.yml`](Hello.cproject.yml) file, exchange:
 
 ```yml
+  packs:
+    - pack: ARM::CMSIS-FreeRTOS
+
+  components:
     - component: CMSIS:RTOS2:FreeRTOS&Cortex-M
     - component: RTOS&FreeRTOS:Config&CMSIS RTOS2
     - component: RTOS&FreeRTOS:Core&Cortex-M
@@ -93,13 +95,11 @@ In the `Hello.cproject.yml` file, exchange:
 with:
 
 ```yml
+  packs:
+    - pack: ARM::CMSIS-FreeRTOS
+
+  components:
     - component: CMSIS:RTOS2:Keil RTX5&Source
-```
-
-In the same file, exchange the **ARM::CMSIS-FreeRTOS** pack with the **ARM::CMSIS-RTX** pack:
-
-```yml
-    - pack: ARM::CMSIS-RTX
 ```
 
 ## Serial I/O via UART
@@ -116,10 +116,15 @@ for `printf` output.
 
 ### Adding Software Components
 
-To be able to redirect the output to the UART, you need to add the following software components in the
-`Hello.cproject.yml` file:
+To redirect the output to a UART:
+
+1. Add the following pack and software components in the [`Hello.cproject.yml`](Hello.cproject.yml) file:
 
 ```yml
+  packs: 
+    - pack: ARM::CMSIS-Compiler
+
+  components:
     - component: CMSIS-Compiler:CORE
     - component: CMSIS-Compiler:STDOUT:Custom
     - component: CMSIS Driver:USART
@@ -129,15 +134,9 @@ To be able to redirect the output to the UART, you need to add the following sof
     - component: Device:XMClib:UART
 ```
 
-Also, add the **ARM::CMSIS-Compiler** pack to the list of `packs:` in the same file:
+2. Add the interface code to UART channel
 
-```yml
-    - pack: ARM::CMSIS-Compiler
-```
-
-### Adding User Code
-
-In the **CMSIS** view, click on the **+** sign next to **Application** and select **Add From Component Code Template**:
+In the Keil Studio **CMSIS** view, click on the **+** sign next to **Application** and select **Add From Component Code Template**:
 
 ![Add code template](./images/add-user-code-template.png)
 
@@ -231,7 +230,7 @@ int stdout_putchar (int ch) {
 }
 ```
 
-### Device Configuration
+3. Configure UART pins
 
 The UART that is connected to the Segger J-Link uses the the ports **P2.1** and **P2.2** on the device. You need to
 configure this in the `RTE_Device.h` file.
@@ -242,7 +241,7 @@ configure this in the `RTE_Device.h` file.
 - In this view, enable `UART0` and set the `UART0_TX_Pin` to `P2_1` and the `UART0_RX_Pin` to `P2_2`.
 - Save the file.
 
-### Build and Run
+4. Build and Run Application.
 
 If you now build the application and run it on the target, you need to change the **SERIAL MONITOR** to the following:
 
