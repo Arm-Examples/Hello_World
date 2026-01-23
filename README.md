@@ -22,7 +22,7 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
 
 1. Install [Keil Studio for VS Code](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) from the
    VS Code marketplace.
-2. Clone this Git repository into a VS Code workspace.
+2. [Clone this Git repository](vscode://vscode.git/clone?url=https://github.com/Arm-Examples/Hello_World.git) into a VS Code workspace.
 3. The related tools and software packs are downloaded and installed. Review progress with
    *View - Output - CMSIS Solution*.
 4. In the CMSIS view, use the
@@ -107,7 +107,7 @@ for production systems (due to intrusive and slow communication). A viable optio
 instead. The following explains how to use the on-chip UART which is available through the Segger J-Link debug adapter
 for `printf` output.
 
-> [!ATTENTION]
+> [!CAUTION]
 > The following is specific for the XMC2Go development board. If you have
 > [changed the target hardware](#change-the-target-hardware), consult your board specific documentation to select the
 > right software components and CMSIS-Packs.
