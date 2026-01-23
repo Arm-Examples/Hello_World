@@ -114,8 +114,6 @@ for `printf` output.
 > [changed the target hardware](#change-the-target-hardware), consult your board specific documentation to select the
 > right software components and CMSIS-Packs.
 
-### Adding Software Components
-
 To redirect the output to a UART:
 
 1. Add the following pack and software components in the [`Hello.cproject.yml`](Hello.cproject.yml) file:
