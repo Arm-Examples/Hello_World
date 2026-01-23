@@ -39,9 +39,8 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
    ...
    ```
 
-[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)](
-vscode://vscode.git/clone?url=https%3A%2F%2Fgithub.com%2FArm-Examples%2FBlinky_FRDM-K32L3A6.git
-)
+[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)](https://vscode.dev/github.com/Arm-Examples/Hello_World)
+
 ## Change Target Hardware
 
 This application is a generic CMSIS example that will run on any target hardware. If you want to change to another
