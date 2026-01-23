@@ -1,14 +1,22 @@
-# Hello, World!
+# Hello, World! (CMSIS Solution Example)
 
-Simple "Hello World" example for
-**[Infineon XMC2Go](https://www.keil.arm.com/boards/infineon-xmc-2go-v1-d3962c0/projects/)** development board.
-This example is configured to print `Hello World` once a second via semihosting to the Telnet console.
+This is a minimal **Hello, World!** application for Arm Cortex-M devices using the **CMSIS Solution** project format.
 
-This application is generic and can be easily adapted to [other target hardware](#change-the-target-hardware). You can
-also [swtich the underlying real-time operating system](#exchange-the-rtos).
+This example demonstrates:
+- A portable CMSIS-Core based application.
+- Build, load, and debug using **Arm Keil Studio** for VS Code.
+- Simple retargetable output (“Hello, World!”) via a [serial I/O message](https://github.com/Arm-Examples/.github/blob/main/profile/Serial.md) channel.
 
-Other [message output options](https://github.com/Arm-Examples/.github/blob/main/profile/Serial.md) can be
-configured as well (refer to [Serial I/O via UART](#serial-io-via-uart)).
+The project is intentionally simple and designed to scale: changing the [**board**](#change-target-hardware), [**serial I/O**](#serial-io-via-uart), [**RTOS**](#change-the-rtos)
+, or [**debug adapter**](https://mdk-packs.github.io/vscode-cmsis-solution-docs/manage_settings.html) is straightforward using **Arm Keil Studio**.
+
+## Current Setup
+
+The setup in this repository is for the **[Infineon XMC2Go](https://www.keil.arm.com/boards/infineon-xmc-2go-v1-d3962c0/projects/)** development board using serial I/O via semihosting to a Telnet port. 
+If you are using a different board refer to [Change Target Hardware](#change-target-hardware). 
+
+> [!NOTE]
+> STM32 boards use typically a STM32CubeMX based configuration with different startup code. Refer to an STM32 based example, i.e. [Hello_B-U585I-IOT02A](https://github.com/Arm-Examples/Hello_B-U585I-IOT02A).
 
 ## Quick Start
 
@@ -31,7 +39,7 @@ configured as well (refer to [Serial I/O via UART](#serial-io-via-uart)).
    ...
    ```
 
-## Change the Target Hardware
+## Change Target Hardware
 
 This application is a generic CMSIS example that will run on any target hardware. If you want to change to another
 development board/device, edit the following.
@@ -62,7 +70,7 @@ Then, change the `target-type:/- type` to a new name and enter the correct `devi
       board: XMC 2Go:V1          # Change to actual board
 ```
 
-## Exchange the RTOS
+## Change the RTOS
 
 This example is using the [CMSIS-RTOS v2 API](https://arm-software.github.io/CMSIS_6/latest/RTOS2/index.html) with
 [CMSIS-FreeRTOS](https://arm-software.github.io/CMSIS-FreeRTOS/main/index.html) as the underlying real-time operating
