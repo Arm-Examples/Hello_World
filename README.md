@@ -118,7 +118,7 @@ for `printf` output.
 
 To redirect the output to a UART:
 
-1. Add the following pack and software components in the [`Hello.cproject.yml`](Hello.cproject.yml) file:
+1. **Add the following pack and software components in the [`Hello.cproject.yml`](Hello.cproject.yml) file:**
 
 ```yml
   packs: 
@@ -134,7 +134,7 @@ To redirect the output to a UART:
     - component: Device:XMClib:UART
 ```
 
-2. Add the interface code to UART channel
+2. **Add the interface code to UART channel**
 
 In the Keil Studio **CMSIS** view, click on the **+** sign next to **Application** and select **Add From Component Code Template**:
 
@@ -230,7 +230,7 @@ int stdout_putchar (int ch) {
 }
 ```
 
-3. Configure UART pins
+3. **Configure UART pins**
 
 The UART that is connected to the Segger J-Link uses the the ports **P2.1** and **P2.2** on the device. You need to
 configure this in the `RTE_Device.h` file.
@@ -241,7 +241,7 @@ configure this in the `RTE_Device.h` file.
 - In this view, enable `UART0` and set the `UART0_TX_Pin` to `P2_1` and the `UART0_RX_Pin` to `P2_2`.
 - Save the file.
 
-4. Build and Run Application.
+4. **Build and Run Application**
 
 If you now build the application and run it on the target, you need to change the **SERIAL MONITOR** to the following:
 
