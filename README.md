@@ -22,7 +22,7 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
 
 1. Install [Keil Studio for VS Code](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) from the
    VS Code marketplace.
-2. [Clone this Git repository](vscode://vscode.git/clone?url=https://github.com/Arm-Examples/Hello_World.git) into a VS Code workspace.
+2. [Clone this Git repository](https://vscode.dev/github.com/Arm-Examples/Hello_World) into a VS Code workspace.
 3. The related tools and software packs are downloaded and installed. Review progress with
    *View - Output - CMSIS Solution*.
 4. In the CMSIS view, use the
@@ -39,6 +39,9 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
    ...
    ```
 
+[![Open in VS Code](https://img.shields.io/badge/Open%20in-VS%20Code-007ACC?logo=visualstudiocode&logoColor=white)](
+vscode://vscode.git/clone?url=https%3A%2F%2Fgithub.com%2FArm-Examples%2FBlinky_FRDM-K32L3A6.git
+)
 ## Change Target Hardware
 
 This application is a generic CMSIS example that will run on any target hardware. If you want to change to another
