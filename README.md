@@ -1,4 +1,6 @@
-[![License](https://img.shields.io/github/license/Arm-Examples/Hello_World?label)](https://github.com/Arm-Examples/Hello_World/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/Arm-Examples/Hello_World?label=License)](https://github.com/Arm-Examples/Hello_World/blob/main/LICENSE)
+[![Build Test](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Hello_World/hello-ci.yml?logo=arm&logoColor=0091bd&label=Build%20test)](./.github/workflows/hello-ci.yml)
+
 
 # Hello, World! (CMSIS Solution Example)
 
