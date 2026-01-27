@@ -35,4 +35,4 @@ jobs:
 
       - name: Build release and debug executable with AC6 compiler
         run: |
-          cbuild Hello.csolution.yml --context .+XMC1100-Q024x0064 --toolchain AC6
+          cbuild Hello.csolution.yml --packs --context .+XMC1100-Q024x0064 --toolchain AC6
