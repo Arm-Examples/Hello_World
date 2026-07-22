@@ -30,7 +30,7 @@ If you are using a different board refer to [Change Target Hardware](#change-tar
 3. The related tools and software packs are downloaded and installed. Review progress with
    *View - Output - CMSIS Solution*.
 4. In the CMSIS view, use the
-   [Action buttons](https://github.com/ARM-software/vscode-cmsis-csolution?tab=readme-ov-file#action-buttons) to build,
+   [Action buttons](https://github.com/Open-CMSIS-Pack/vscode-cmsis-solution#action-buttons) to build,
    load and debug the example on the hardware.
 5. In the [VS Code Panel](https://code.visualstudio.com/api/ux-guidelines/panel), click on **SERIAL MONITOR**. Select
    the **Monitor Mode** "TCP" and set **Host** to `localhost` and **Port** to `4444`. Observe the output:
